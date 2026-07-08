@@ -41,7 +41,6 @@ group_imports="Preserve"
 hard_tabs=false
 # hide_parse_errors=false
 ignore=[
-
 ]
 imports_granularity="Crate"
 imports_indent="Block"
