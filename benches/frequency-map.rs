@@ -316,7 +316,7 @@ fn BENCHMARK_from_T_MEDIUM_UNIQ(c : &mut Criterion) {
 
     c.bench_function(&id, |b| {
         b.iter(|| {
-            let fm= FrequencyMap::from(input);
+            let fm = FrequencyMap::from(input);
 
             let _ = black_box(fm);
         })
@@ -503,7 +503,12 @@ fn BENCHMARK_append_EMPTY_TO_EMPTY(c : &mut Criterion) {
 
     c.bench_function(&id, |b| {
         b.iter_batched_ref(
-            || (FrequencyMap::from_iter(input1.clone().into_iter()), FrequencyMap::from_iter(input2.clone().into_iter())),
+            || {
+                (
+                    FrequencyMap::from_iter(input1.clone().into_iter()),
+                    FrequencyMap::from_iter(input2.clone().into_iter()),
+                )
+            },
             |(dest, src)| {
                 black_box(dest.append(src));
             },
@@ -519,7 +524,12 @@ fn BENCHMARK_append_EMPTY_TO_SMALL(c : &mut Criterion) {
 
     c.bench_function(&id, |b| {
         b.iter_batched_ref(
-            || (FrequencyMap::from_iter(input1.clone().into_iter()), FrequencyMap::from_iter(input2.clone().into_iter())),
+            || {
+                (
+                    FrequencyMap::from_iter(input1.clone().into_iter()),
+                    FrequencyMap::from_iter(input2.clone().into_iter()),
+                )
+            },
             |(dest, src)| {
                 black_box(dest.append(src));
             },
@@ -535,7 +545,12 @@ fn BENCHMARK_append_SMALL_TO_EMPTY(c : &mut Criterion) {
 
     c.bench_function(&id, |b| {
         b.iter_batched_ref(
-            || (FrequencyMap::from_iter(input1.clone().into_iter()), FrequencyMap::from_iter(input2.clone().into_iter())),
+            || {
+                (
+                    FrequencyMap::from_iter(input1.clone().into_iter()),
+                    FrequencyMap::from_iter(input2.clone().into_iter()),
+                )
+            },
             |(dest, src)| {
                 black_box(dest.append(src));
             },
@@ -551,7 +566,12 @@ fn BENCHMARK_append_SMALL_TO_SMALL(c : &mut Criterion) {
 
     c.bench_function(&id, |b| {
         b.iter_batched_ref(
-            || (FrequencyMap::from_iter(input1.clone().into_iter()), FrequencyMap::from_iter(input2.clone().into_iter())),
+            || {
+                (
+                    FrequencyMap::from_iter(input1.clone().into_iter()),
+                    FrequencyMap::from_iter(input2.clone().into_iter()),
+                )
+            },
             |(dest, src)| {
                 black_box(dest.append(src));
             },
@@ -567,7 +587,12 @@ fn BENCHMARK_append_LARGE_TO_SMALL(c : &mut Criterion) {
 
     c.bench_function(&id, |b| {
         b.iter_batched_ref(
-            || (FrequencyMap::from_iter(input1.clone().into_iter()), FrequencyMap::from_iter(input2.clone().into_iter())),
+            || {
+                (
+                    FrequencyMap::from_iter(input1.clone().into_iter()),
+                    FrequencyMap::from_iter(input2.clone().into_iter()),
+                )
+            },
             |(dest, src)| {
                 black_box(dest.append(src));
             },
@@ -583,7 +608,12 @@ fn BENCHMARK_append_SMALL_TO_LARGE(c : &mut Criterion) {
 
     c.bench_function(&id, |b| {
         b.iter_batched_ref(
-            || (FrequencyMap::from_iter(input1.clone().into_iter()), FrequencyMap::from_iter(input2.clone().into_iter())),
+            || {
+                (
+                    FrequencyMap::from_iter(input1.clone().into_iter()),
+                    FrequencyMap::from_iter(input2.clone().into_iter()),
+                )
+            },
             |(dest, src)| {
                 black_box(dest.append(src));
             },
@@ -599,7 +629,12 @@ fn BENCHMARK_append_LARGE_TO_LARGE(c : &mut Criterion) {
 
     c.bench_function(&id, |b| {
         b.iter_batched_ref(
-            || (FrequencyMap::from_iter(input1.clone().into_iter()), FrequencyMap::from_iter(input2.clone().into_iter())),
+            || {
+                (
+                    FrequencyMap::from_iter(input1.clone().into_iter()),
+                    FrequencyMap::from_iter(input2.clone().into_iter()),
+                )
+            },
             |(dest, src)| {
                 black_box(dest.append(src));
             },
@@ -994,9 +1029,7 @@ fn BENCHMARK_retain_EMPTY(c : &mut Criterion) {
         b.iter_batched_ref(
             || FrequencyMap::from_iter(input.clone().into_iter()),
             |fm| {
-                black_box(fm.retain(|k, _count| {
-                    0 == (k % 2)
-                }));
+                black_box(fm.retain(|k, _count| 0 == (k % 2)));
             },
             BatchSize::SmallInput,
         )
@@ -1011,9 +1044,7 @@ fn BENCHMARK_retain_SMALL(c : &mut Criterion) {
         b.iter_batched_ref(
             || FrequencyMap::from_iter(input.clone().into_iter()),
             |fm| {
-                black_box(fm.retain(|k, _count| {
-                    0 == (k % 2)
-                }));
+                black_box(fm.retain(|k, _count| 0 == (k % 2)));
             },
             BatchSize::SmallInput,
         )
@@ -1028,9 +1059,7 @@ fn BENCHMARK_retain_MEDIUM(c : &mut Criterion) {
         b.iter_batched_ref(
             || FrequencyMap::from_iter(input.clone().into_iter()),
             |fm| {
-                black_box(fm.retain(|k, _count| {
-                    0 == (k % 2)
-                }));
+                black_box(fm.retain(|k, _count| 0 == (k % 2)));
             },
             BatchSize::SmallInput,
         )
@@ -1045,9 +1074,7 @@ fn BENCHMARK_retain_LARGE(c : &mut Criterion) {
         b.iter_batched_ref(
             || FrequencyMap::from_iter(input.clone().into_iter()),
             |fm| {
-                black_box(fm.retain(|k, _count| {
-                    0 == (k % 2)
-                }));
+                black_box(fm.retain(|k, _count| 0 == (k % 2)));
             },
             BatchSize::SmallInput,
         )
